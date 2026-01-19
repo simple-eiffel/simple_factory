@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple_factory - Object Creation Patterns for Eiffel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="simple_factory logo" class="logo">
+        </div>
+        <h1>simple_factory</h1>
+        <p class="tagline">Object Creation Patterns for Eiffel</p>
+        <div class="badges">
+            <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
+            <img src="https://img.shields.io/badge/Eiffel-25.02-purple.svg" alt="Eiffel 25.02">
+            <img src="https://img.shields.io/badge/DBC-Contracts-green.svg" alt="Design by Contract">
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#patterns">Patterns</a></li>
+            <li><a href="#api-reference">API Reference</a></li>
+            <li><a href="https://github.com/simple-eiffel/simple_factory">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                <strong>simple_factory</strong> provides battle-tested creational design patterns for Eiffel
+                applications. It includes the <strong>Factory Pattern</strong> for type-safe object creation,
+                <strong>Singleton Pattern</strong> for shared instances, <strong>Object Pool</strong> for
+                resource management, and <strong>Lazy Initialization</strong> for deferred computation.
+            </p>
+            <p>
+                All patterns are implemented with full Design by Contract support and void-safety.
+                Part of the <a href="https://github.com/simple-eiffel">Simple Eiffel</a> ecosystem.
+            </p>
+        </section>
+
+        <section id="quick-start">
+            <h2>Quick Start</h2>
+
+            <h3>Installation</h3>
+            <ol>
+                <li>Set the environment variable:
+<pre><code>export SIMPLE_EIFFEL=/d/prod</code></pre>
+                </li>
+                <li>Add to your ECF file:
+<pre><code>&lt;library name="simple_factory" location="$SIMPLE_EIFFEL/simple_factory/simple_factory.ecf"/&gt;</code></pre>
+                </li>
+            </ol>
+
+            <h3>Factory Pattern</h3>
+<pre><code><span class="keyword">local</span>
+    factory: <span class="type">SIMPLE_TYPE_FACTORY</span> [<span class="type">MY_OBJECT</span>]
+<span class="keyword">do</span>
+    <span class="keyword">create</span> factory.make
+    factory.register_type (<span class="string">"widget"</span>, {<span class="type">MY_OBJECT</span>})
+
+    <span class="comment">-- Create by registered key</span>
+    obj := factory.new_instance_from_string (<span class="string">"widget"</span>)
+<span class="keyword">end</span></code></pre>
+
+            <h3>Object Pool</h3>
+<pre><code><span class="keyword">local</span>
+    pool: <span class="type">SIMPLE_OBJECT_POOL</span> [<span class="type">DB_CONNECTION</span>]
+    conn: <span class="type">DB_CONNECTION</span>
+<span class="keyword">do</span>
+    <span class="keyword">create</span> pool.make_bounded (5, 20)  <span class="comment">-- 5 initial, 20 max</span>
+
+    conn := pool.acquire
+    <span class="comment">-- use connection...</span>
+    pool.release (conn)  <span class="comment">-- Returns to pool, reset</span>
+<span class="keyword">end</span></code></pre>
+
+            <h3>Lazy Initialization</h3>
+<pre><code><span class="keyword">local</span>
+    config: <span class="type">SIMPLE_ONCE_CELL</span> [<span class="type">CONFIG</span>]
+<span class="keyword">do</span>
+    <span class="keyword">create</span> config.make (<span class="keyword">agent</span> load_config)
+
+    <span class="comment">-- Computed only on first access</span>
+    print (config.item.database_url)
+<span class="keyword">end</span></code></pre>
+        </section>
+
+        <section id="patterns">
+            <h2>Patterns</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Factory Pattern</h4>
+                    <p>Abstract and concrete factories for type-safe object creation with registered types.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Singleton Pattern</h4>
+                    <p>Lazy-initialized singletons with proper encapsulation and testability.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Object Pool</h4>
+                    <p>Reusable object pooling with bounded/unbounded capacity and automatic reset.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>Lazy Initialization</h4>
+                    <p>Once cells and keyed caches for deferred, cacheable computations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="api-reference">
+            <h2>API Reference</h2>
+
+            <div class="api-section">
+                <h3>SIMPLE_TYPE_FACTORY [G]</h3>
+                <p>Concrete factory using TYPE manifests for instantiation.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>make</code></td><td>Create factory with empty type table</td></tr>
+                    <tr><td><code>register_type (key, type)</code></td><td>Register TYPE for creation via key</td></tr>
+                    <tr><td><code>new_instance: G</code></td><td>Create fresh instance</td></tr>
+                    <tr><td><code>new_instance_from_string (spec): G</code></td><td>Create from registered key</td></tr>
+                    <tr><td><code>has_type (key): BOOLEAN</code></td><td>Is type registered?</td></tr>
+                </table>
+            </div>
+
+            <div class="api-section">
+                <h3>SIMPLE_OBJECT_POOL [G]</h3>
+                <p>Reusable object pool for expensive-to-create objects.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>make (capacity)</code></td><td>Create unbounded pool</td></tr>
+                    <tr><td><code>make_bounded (capacity, max)</code></td><td>Create pool with max size</td></tr>
+                    <tr><td><code>acquire: G</code></td><td>Get object from pool</td></tr>
+                    <tr><td><code>release (obj)</code></td><td>Return object to pool</td></tr>
+                    <tr><td><code>release_all</code></td><td>Return all objects</td></tr>
+                    <tr><td><code>count, available_count, in_use_count</code></td><td>Pool metrics</td></tr>
+                </table>
+            </div>
+
+            <div class="api-section">
+                <h3>SIMPLE_ONCE_CELL [G]</h3>
+                <p>Lazy initialization container for expensive computations.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>make (factory)</code></td><td>Create with factory function</td></tr>
+                    <tr><td><code>item: G</code></td><td>Get value (computes if needed)</td></tr>
+                    <tr><td><code>is_computed: BOOLEAN</code></td><td>Has value been computed?</td></tr>
+                    <tr><td><code>invalidate</code></td><td>Force recomputation on next access</td></tr>
+                </table>
+            </div>
+
+            <div class="api-section">
+                <h3>SIMPLE_CACHED_VALUE [G, K]</h3>
+                <p>Keyed cache with automatic computation.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>make (factory)</code></td><td>Create with factory function</td></tr>
+                    <tr><td><code>item (key): G</code></td><td>Get cached or compute value</td></tr>
+                    <tr><td><code>is_cached (key): BOOLEAN</code></td><td>Is value in cache?</td></tr>
+                    <tr><td><code>invalidate (key)</code></td><td>Remove from cache</td></tr>
+                    <tr><td><code>invalidate_all</code></td><td>Clear entire cache</td></tr>
+                </table>
+            </div>
+
+            <div class="api-section">
+                <h3>SIMPLE_SINGLETON [G]</h3>
+                <p>Singleton holder with lazy initialization.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>instance: G</code></td><td>The singleton instance</td></tr>
+                    <tr><td><code>is_initialized: BOOLEAN</code></td><td>Has instance been created?</td></tr>
+                    <tr><td><code>reset_instance</code></td><td>Clear singleton (testing only)</td></tr>
+                </table>
+            </div>
+
+            <div class="api-section">
+                <h3>SIMPLE_CREATABLE</h3>
+                <p>Interface for factory-creatable objects. Inherit this to use with factories and pools.</p>
+                <table class="api-table">
+                    <tr><th>Feature</th><th>Description</th></tr>
+                    <tr><td><code>make_default</code></td><td>Initialize with defaults (deferred)</td></tr>
+                    <tr><td><code>is_in_default_state: BOOLEAN</code></td><td>Is in default state? (deferred)</td></tr>
+                    <tr><td><code>reset</code></td><td>Return to default state</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="contracts">
+            <h2>Design by Contract</h2>
+            <p>All classes use comprehensive contracts for correctness guarantees:</p>
+
+            <div class="contracts">
+                <h4>Example: SIMPLE_OBJECT_POOL.acquire</h4>
+                <div class="require">
+                    <strong>require</strong><br>
+                    can_acquire: can_acquire
+                </div>
+                <div class="ensure">
+                    <strong>ensure</strong><br>
+                    result_exists: Result /= Void<br>
+                    in_use_count_increased: in_use_count = old in_use_count + 1
+                </div>
+            </div>
+
+            <div class="contracts">
+                <h4>Example: SIMPLE_OBJECT_POOL.release</h4>
+                <div class="require">
+                    <strong>require</strong><br>
+                    object_exists: a_object /= Void<br>
+                    was_acquired: is_in_use (a_object)
+                </div>
+                <div class="ensure">
+                    <strong>ensure</strong><br>
+                    in_use_count_decreased: in_use_count = old in_use_count - 1<br>
+                    object_reset: a_object.is_in_default_state
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>2025 simple_* ecosystem. MIT License.</p>
+        <p>
+            <a href="https://github.com/simple-eiffel/simple_factory">GitHub</a> |
+            <a href="https://simple-eiffel.github.io">Documentation</a>
+        </p>
+    </footer>
+</body>
+</html>
