@@ -1,0 +1,76 @@
+/*
+ * Class ITERABLE [POINTER]
+ */
+
+#include "eif_macros.h"
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+static const EIF_TYPE_INDEX egt_0_252 [] = {0xFF01,178,0xFFFF};
+static const EIF_TYPE_INDEX egt_1_252 [] = {0xFF01,184,251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_2_252 [] = {0xFF01,251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_3_252 [] = {0,0xFFFF};
+static const EIF_TYPE_INDEX egt_4_252 [] = {0,0xFFFF};
+static const EIF_TYPE_INDEX egt_5_252 [] = {0xFF01,251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_6_252 [] = {0xFF01,251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_7_252 [] = {0,0xFFFF};
+static const EIF_TYPE_INDEX egt_8_252 [] = {0xFF01,11,0xFFFF};
+static const EIF_TYPE_INDEX egt_9_252 [] = {0xFF01,178,0xFFFF};
+static const EIF_TYPE_INDEX egt_10_252 [] = {0xFF01,178,0xFFFF};
+static const EIF_TYPE_INDEX egt_11_252 [] = {0xFF01,12,0xFFFF};
+static const EIF_TYPE_INDEX egt_12_252 [] = {251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_13_252 [] = {0xFF01,251,168,0xFFFF};
+static const EIF_TYPE_INDEX egt_14_252 [] = {0xFF01,252,0xFFF8,1,0xFFFF};
+static const EIF_TYPE_INDEX egt_15_252 [] = {0xFFF8,1,0xFFFF};
+
+
+static const struct desc_info desc_252[] = {
+	{EIF_GENERIC(NULL), 0xFFFFFFFF, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_0_252), 0, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_1_252), 1, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 2, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 3, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 4, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 5, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 6, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 7, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 8, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x014B /*165*/), 9, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_2_252), 10, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 11, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 12, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_3_252), 13, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_4_252), 14, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_5_252), 15, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_6_252), 16, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_7_252), 17, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 18, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 19, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_8_252), 20, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_9_252), 21, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_10_252), 22, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 23, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_11_252), 24, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 25, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 26, 0xFFFFFFFF},
+	{EIF_GENERIC(NULL), 27, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_12_252), 28, 0xFFFFFFFF},
+	{EIF_NON_GENERIC(0x0151 /*168*/), 29, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_13_252), 30, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_14_252), 0x00, 0xFFFFFFFF},
+	{EIF_GENERIC(egt_15_252), 0x00, 0xFFFFFFFF},
+};
+void Init252(void)
+{
+	IDSC(desc_252, 0, 251);
+	IDSC(desc_252 + 1, 2, 251);
+	IDSC(desc_252 + 32, 51, 251);
+}
+
+
+#ifdef __cplusplus
+}
+#endif
