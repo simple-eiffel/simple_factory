@@ -1,14 +1,23 @@
-# simple_factory
+<p align="center">
+  <img src="docs/images/logo.png" alt="simple_factory logo" width="200">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Eiffel 25.02](https://img.shields.io/badge/Eiffel-25.02-purple.svg)](https://www.eiffel.org)
-[![DBC](https://img.shields.io/badge/DBC-Contracts-green.svg)](https://www.eiffel.org/doc/solutions/Design_by_Contract)
+<h1 align="center">simple_factory</h1>
+
+<p align="center">
+  <a href="https://simple-eiffel.github.io/simple_factory/">Documentation</a> |
+  <a href="https://github.com/simple-eiffel/simple_factory">GitHub</a>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/Eiffel-25.02-purple.svg" alt="Eiffel 25.02">
+  <img src="https://img.shields.io/badge/DBC-Contracts-green.svg" alt="Design by Contract">
+</p>
 
 Object creation patterns for Eiffel: factories, singletons, object pools, and lazy initialization.
 
 Part of the [Simple Eiffel](https://github.com/simple-eiffel) ecosystem.
-
-[Documentation](https://simple-eiffel.github.io/simple_factory/) | [GitHub](https://github.com/simple-eiffel/simple_factory)
 
 ## Status
 
@@ -44,12 +53,12 @@ local
 do
     create factory.make
     factory.register_type ("my_type", {MY_OBJECT})
-    
+
     -- Create by type key
     if factory.is_valid_specification ("my_type") then
         my_obj := factory.new_instance_from_string ("my_type")
     end
-    
+
     -- Or create directly
     my_obj := factory.new_instance
 end
@@ -64,10 +73,10 @@ local
 do
     -- Unbounded pool
     create pool.make (10)
-    
+
     -- Or bounded pool (max 100 objects)
     create pool.make_bounded (10, 100)
-    
+
     -- Acquire/release pattern
     obj := pool.acquire
     -- use obj...
@@ -83,14 +92,14 @@ local
 do
     -- Value computed only when first accessed
     create cell.make (agent compute_expensive_resource)
-    
+
     if cell.is_computed then
         print ("Already computed")
     end
-    
+
     resource := cell.item  -- Computes on first access
     resource := cell.item  -- Returns cached value
-    
+
     cell.invalidate  -- Force recomputation on next access
 end
 ```
@@ -102,10 +111,10 @@ local
     cache: SIMPLE_CACHED_VALUE [PARSED_DATA, STRING]
 do
     create cache.make (agent parse_file)
-    
+
     data := cache.item ("config.json")  -- Parses file
     data := cache.item ("config.json")  -- Returns cached
-    
+
     cache.invalidate ("config.json")    -- Remove from cache
     cache.invalidate_all                -- Clear all cached values
 end
