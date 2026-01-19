@@ -1,27 +1,18 @@
-<p align="center">
-  <img src="docs/images/logo.png" alt="simple_factory logo" width="200">
-</p>
+# simple_factory
 
-<h1 align="center">simple_factory</h1>
-
-<p align="center">
-  <a href="https://simple-eiffel.github.io/simple_factory/">Documentation</a> â€¢
-  <a href="https://github.com/simple-eiffel/simple_factory">GitHub</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
-  <img src="https://img.shields.io/badge/Eiffel-25.02-purple.svg" alt="Eiffel 25.02">
-  <img src="https://img.shields.io/badge/DBC-Contracts-green.svg" alt="Design by Contract">
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Eiffel 25.02](https://img.shields.io/badge/Eiffel-25.02-purple.svg)](https://www.eiffel.org)
+[![DBC](https://img.shields.io/badge/DBC-Contracts-green.svg)](https://www.eiffel.org/doc/solutions/Design_by_Contract)
 
 Object creation patterns for Eiffel: factories, singletons, object pools, and lazy initialization.
 
 Part of the [Simple Eiffel](https://github.com/simple-eiffel) ecosystem.
 
+[Documentation](https://simple-eiffel.github.io/simple_factory/) | [GitHub](https://github.com/simple-eiffel/simple_factory)
+
 ## Status
 
-âœ… **Production Ready** â€” v1.0.0
+**Production Ready** - v1.0.0
 - 53 tests passing, full coverage
 - Design by Contract throughout
 - Void-safe implementation
