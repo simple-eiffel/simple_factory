@@ -1,0 +1,14 @@
+# EiffelStudio build outputs
+EIFGENs/
+
+# Backup files
+*.bak
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+*.swp
+*.swo
