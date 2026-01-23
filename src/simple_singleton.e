@@ -38,8 +38,11 @@ feature -- Modification
 			-- Clear singleton (use with caution)
 			-- WARNING: This breaks singleton contract for existing references!
 			-- Only use for testing or controlled shutdown scenarios.
+			-- Note: Implementation uses default_value workaround for void-safe generic reset.
+		local
+			l_default: detachable G
 		do
-			internal_instance := Void
+			internal_instance := l_default
 		ensure
 			not_initialized: not is_initialized
 		end
@@ -48,6 +51,8 @@ feature {NONE} -- Implementation
 
 	internal_instance: detachable G
 			-- Cached instance
+		attribute
+		end
 
 	new_instance: G
 			-- Create the singleton instance

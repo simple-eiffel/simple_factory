@@ -14,8 +14,7 @@ feature {NONE} -- Initialization
 
 	make (a_factory: FUNCTION [K, G])
 			-- Create with factory that computes value from key
-		require
-			factory_exists: a_factory /= Void
+			-- Note: a_factory is attached by default in void-safe mode
 		do
 			factory := a_factory
 			create cache.make (Default_cache_capacity)
@@ -28,8 +27,7 @@ feature -- Access
 
 	item (a_key: K): G
 			-- Value for `a_key`, computed if not cached
-		require
-			key_exists: a_key /= Void
+			-- Note: a_key is attached by K -> HASHABLE constraint
 		do
 			if attached cache.item (a_key) as l_value then
 				Result := l_value
@@ -45,8 +43,7 @@ feature -- Status Query
 
 	is_cached (a_key: K): BOOLEAN
 			-- Is value for `a_key` in cache?
-		require
-			key_exists: a_key /= Void
+			-- Note: a_key is attached by K -> HASHABLE constraint
 		do
 			Result := cache.has (a_key)
 		end
@@ -55,8 +52,7 @@ feature -- Modification
 
 	invalidate (a_key: K)
 			-- Remove `a_key` from cache
-		require
-			key_exists: a_key /= Void
+			-- Note: a_key is attached by K -> HASHABLE constraint
 		do
 			cache.remove (a_key)
 		ensure
@@ -94,8 +90,7 @@ feature {NONE} -- Constants
 			-- Initial capacity for cache hash table
 
 invariant
-	factory_exists: factory /= Void
-	cache_exists: cache /= Void
+	-- Note: factory and cache are attached by default in void-safe mode
 	count_non_negative: cached_count >= 0
 
 end

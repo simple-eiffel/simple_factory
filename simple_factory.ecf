@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-23-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-23-0 http://www.eiffel.com/developers/xml/configuration-1-23-0.xsd" name="simple_factory" uuid="A1B2C3D4-E5F6-7890-ABCD-EF1234567890" library_target="simple_factory">
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-23-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-23-0 http://www.eiffel.com/developers/xml/configuration-1-23-0.xsd" name="simple_factory" uuid="c8deabf8-a0c9-4477-9c83-82d70dfdce8e" library_target="simple_factory">
 	<description>Factory patterns, singletons, object pools, and lazy initialization</description>
 	<target name="simple_factory">
 		<root all_classes="true"/>
@@ -17,10 +17,13 @@
 			<void_safety support="all"/>
 		</capability>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="simple_mml" location="$SIMPLE_EIFFEL\simple_mml\simple_mml.ecf"/>
 		<cluster name="src" location=".\src\" recursive="true"/>
 	</target>
 	<target name="simple_factory_tests" extends="simple_factory">
-		<root class="TEST_SIMPLE_FACTORY" feature="make"/>
+		<root class="TEST_APP" feature="make"/>
+				<library name="testing" location="$ISE_LIBRARY\library	esting	esting.ecf"/>
+				<library name="simple_testing" location="$SIMPLE_EIFFEL\simple_testing\simple_testing.ecf"/>
 		<cluster name="test" location=".\testing\" recursive="true"/>
 	</target>
 </system>

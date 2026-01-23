@@ -14,8 +14,7 @@ feature {NONE} -- Initialization
 
 	make (a_factory: FUNCTION [G])
 			-- Create with factory function
-		require
-			factory_exists: a_factory /= Void
+			-- Note: a_factory is attached by default in void-safe mode
 		do
 			factory := a_factory
 			is_invalidated := True
@@ -70,6 +69,7 @@ feature {NONE} -- Implementation
 			-- Has cache been invalidated?
 
 invariant
-	factory_exists: factory /= Void
+	-- Note: factory is attached by default in void-safe mode
+	invalidation_state_consistent: is_invalidated implies not is_computed
 
 end

@@ -53,8 +53,7 @@ feature -- Modification
 
 	set_name (a_name: STRING)
 			-- Set `name` to `a_name`
-		require
-			name_exists: a_name /= Void
+			-- Note: a_name is attached by default in void-safe mode
 		do
 			name := a_name
 		ensure
@@ -62,6 +61,7 @@ feature -- Modification
 		end
 
 invariant
-	name_exists: name /= Void
+	-- Note: name is attached by default in void-safe mode
+	name_not_empty: not name.is_empty or name.same_string ("default")
 
 end

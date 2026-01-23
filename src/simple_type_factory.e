@@ -88,10 +88,9 @@ feature -- Registration
 
 	register_type (a_key: READABLE_STRING_GENERAL; a_type: TYPE [G])
 			-- Register `a_type` for creation via `a_key`
+			-- Note: Parameters are attached by default in void-safe mode
 		require
-			key_exists: a_key /= Void
 			key_not_empty: not a_key.is_empty
-			type_exists: a_type /= Void
 			not_registered: not has_type (a_key)
 		do
 			type_table.put (a_type, a_key.to_string_32)
@@ -104,23 +103,20 @@ feature -- Query
 
 	has_type (a_key: READABLE_STRING_GENERAL): BOOLEAN
 			-- Is a type registered for `a_key`?
-		require
-			key_exists: a_key /= Void
+			-- Note: a_key is attached by default in void-safe mode
 		do
 			Result := type_table.has (a_key.to_string_32)
 		end
 
 	type_for_key (a_key: READABLE_STRING_GENERAL): TYPE [G]
 			-- Type registered for `a_key`
+			-- Note: a_key is attached by default in void-safe mode
 		require
-			key_exists: a_key /= Void
 			has_key: has_type (a_key)
 		do
 			check attached type_table.item (a_key.to_string_32) as l_type then
 				Result := l_type
 			end
-		ensure
-			result_exists: Result /= Void
 		end
 
 feature {NONE} -- Implementation
@@ -134,6 +130,7 @@ feature {NONE} -- Constants
 			-- Initial capacity for type table
 
 invariant
-	type_table_exists: type_table /= Void
+	-- Note: type_table is attached by default in void-safe mode
+	type_count_non_negative: type_table.count >= 0
 
 end

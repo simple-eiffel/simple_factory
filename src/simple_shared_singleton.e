@@ -35,8 +35,6 @@ feature {NONE} -- Implementation
 
 	once_instance: detachable G
 			-- Once-per-process cached instance
-		note
-			option: stable
 		attribute
 		end
 

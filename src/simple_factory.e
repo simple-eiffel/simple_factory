@@ -23,7 +23,6 @@ feature -- Factory
 			valid_spec: is_valid_specification (a_spec)
 		deferred
 		ensure
-			result_exists: Result /= Void
 			matches_spec: matches_specification (Result, a_spec)
 		end
 
@@ -31,8 +30,7 @@ feature -- Status Query
 
 	is_valid_specification (a_spec: READABLE_STRING_GENERAL): BOOLEAN
 			-- Can `a_spec` be used to create an instance?
-		require
-			spec_exists: a_spec /= Void
+			-- Note: a_spec is attached by default in void-safe mode
 		deferred
 		end
 
@@ -40,16 +38,13 @@ feature -- Contract Support
 
 	matches_specification (a_object: G; a_spec: READABLE_STRING_GENERAL): BOOLEAN
 			-- Does `a_object` match `a_spec`?
-		require
-			object_exists: a_object /= Void
-			spec_exists: a_spec /= Void
+			-- Note: Parameters are attached by default in void-safe mode
 		deferred
 		end
 
 	was_recycled (a_object: G): BOOLEAN
 			-- Was `a_object` returned from a pool rather than freshly created?
-		require
-			object_exists: a_object /= Void
+			-- Note: a_object is attached by default in void-safe mode
 		do
 			Result := False
 		end
