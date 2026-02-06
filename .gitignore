@@ -12,3 +12,6 @@ Thumbs.db
 # IDE files
 *.swp
 *.swo
+*.melted
+*.epr
+*.log
