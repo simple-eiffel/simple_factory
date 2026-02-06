@@ -13,7 +13,7 @@
 		<setting name="console_application" value="true"/>
 		<setting name="dead_code_removal" value="feature"/>
 		<capability>
-			<concurrency support="scoop" use="thread"/>
+			<concurrency support="scoop"/>
 			<void_safety support="all"/>
 		</capability>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
@@ -22,7 +22,7 @@
 	</target>
 	<target name="simple_factory_tests" extends="simple_factory">
 		<root class="TEST_APP" feature="make"/>
-				<library name="testing" location="$ISE_LIBRARY\library	esting	esting.ecf"/>
+				<library name="testing" location="$ISE_LIBRARY\library\testing\testing.ecf"/>
 				<library name="simple_testing" location="$SIMPLE_EIFFEL\simple_testing\simple_testing.ecf"/>
 		<cluster name="test" location=".\testing\" recursive="true"/>
 	</target>
